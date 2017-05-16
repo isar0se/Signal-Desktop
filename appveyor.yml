@@ -14,7 +14,7 @@ build_script:
   - yarn help
 
 test_script:
-  - yarn test
+  - ./node_modules/.bin/grunt test
 
 artifacts:
   - path: dist/*.*
