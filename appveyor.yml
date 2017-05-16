@@ -1,10 +1,6 @@
 platform:
   - x64
 
-cache:
-  - node_modules
-  - '%LOCALAPPDATA%\electron\Cache'
-
 install:
   - set PATH=C:\Ruby23-x64\bin;%PATH%
   - ps: Install-Product node 6 x64
