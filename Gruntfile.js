@@ -349,6 +349,7 @@ module.exports = function(grunt) {
       var done = this.async();
       var failure;
 
+      console.log('starting task');
       var Application = require('spectron').Application;
       var app = new Application({
         path: path.join(__dirname, 'node_modules', '.bin', 'electron'),
@@ -361,6 +362,7 @@ module.exports = function(grunt) {
       function getMochaResults() {
         return window.mochaResults;
       }
+      console.log('created application');
 
       app.start().then(function() {
         console.log('started app');
