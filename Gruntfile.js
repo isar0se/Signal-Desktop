@@ -363,14 +363,19 @@ module.exports = function(grunt) {
       }
 
       app.start().then(function() {
+        console.log('started app');
         return app.client.waitUntil(function() {
+          console.log('in waitUntil');
           return app.client.execute(getMochaResults).then(function(data) {
+            console.log('got results of execute');
             return Boolean(data.value);
           });
         }, 10000, 'Expected to find window.mochaResults set!');
       }).then(function() {
+        console.log('getting real mochaResults');
         return app.client.execute(getMochaResults);
       }).then(function(data) {
+        console.log('processing mochaResults');
         var results = data.value;
         if (results.failures > 0) {
           console.error(results.reports);
@@ -381,10 +386,12 @@ module.exports = function(grunt) {
           grunt.log.ok(results.passes + ' tests passed.');
         }
       }).catch(function (error) {
+        console.log('Something went wrong: ' + error.message + ' ' + error.stack);
         failure = function() {
           grunt.fail.fatal('Something went wrong: ' + error.message + ' ' + error.stack);
         };
       }).then(function () {
+        console.log('Stopping app');
         // We need to use the failure variable and this early stop to clean up before
         // shutting down. Grunt's fail methods are the only way to set the return value,
         // but they shut the process down immediately!
